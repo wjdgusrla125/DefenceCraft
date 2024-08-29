@@ -25,6 +25,7 @@ public class FSM_CharacterState_MagicSkill : VMyState<FSM_CharacterState>
         
         if (Input.GetMouseButtonDown(0))
         {
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             

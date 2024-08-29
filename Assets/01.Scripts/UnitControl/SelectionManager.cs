@@ -241,6 +241,7 @@ public class SelectionManager : MonoBehaviour
 }*/
 
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -304,21 +305,22 @@ public class SelectionManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (IsAnyUnitInMagicSkillState())
+            {
+                return;
+            }
+            
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             
             rayStart = ray.origin;
-            rayEnd = ray.origin + ray.direction * 100f; // Extend the ray to make it visible
+            rayEnd = ray.origin + ray.direction * 100f;
             rayTimer = rayDuration;
             
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, allDetectableLayers))
             {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("UI")) return;
-                
                 GameObject clickedObject = hit.collider.gameObject;
                 
-                Debug.Log($"{clickedObject}");
-
                 if (clickedObject.GetComponent<Building>() != null)
                 {
                     BuildingSelect(clickedObject);
@@ -365,6 +367,20 @@ public class SelectionManager : MonoBehaviour
                 MoveSelectedUnits(hit.point);
             }
         }   
+    }
+    
+    private bool IsAnyUnitInMagicSkillState()
+    {
+        return unitSelected.Any(unit =>
+        {
+            Character character = unit.GetComponent<Character>();
+            if (character != null && character.Fsm != null)
+            {
+                var currentState = character.Fsm.GetCurrentState();
+                return currentState is FSM_CharacterState_MagicSkill;
+            }
+            return false;
+        });
     }
 
     private void SingleSelect(GameObject unit)
@@ -424,7 +440,7 @@ public class SelectionManager : MonoBehaviour
         groundMarker.SetActive(false);
         unitSelected.Clear();
         UIManager.Instance.HideBuildingUI();
-        UIManager.Instance.DisableUnitUI();
+        UIManager.Instance.DisableAllUI();
     }
 
     private void SelectUnit(GameObject unit, bool isSelected)
@@ -514,5 +530,4 @@ public class SelectionManager : MonoBehaviour
             Gizmos.DrawLine(rayStart, rayEnd);
         }
     }
-
 }

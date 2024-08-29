@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -26,16 +27,16 @@ public class UIManager : MonoBehaviour
     public Button stopButton;
     public List<SkillButton> skillButtons;
     public List<UnitProductButton> unitProductButtons;
-    public GameObject buildingUI;
+    public GameObject unitProductUI;
     public GameObject unitControlUI;
+    public GameObject BuildingUI;
     
     // 이벤트 정의
     public event Action<int> OnSkillButtonClicked;
-    public event Action<UnitType> OnUnitProductButtonClicked;
+    
     
     private Building selectedBuilding;
     
-    //유닛 생성
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -60,16 +61,11 @@ public class UIManager : MonoBehaviour
             unitProductButtons[i].button.onClick.AddListener(() => UnitProductButtonClicked(unitType));
         }
 
-        DisableUnitUI();
+        DisableAllUI();
         //SetAllButtonsActive(false);
         HideBuildingUI();
     }
-
-    private void Start()
-    {
-        
-    }
-
+    
     private void SkillButtonClicked(int skillIndex)
     {
         OnSkillButtonClicked?.Invoke(skillIndex);
@@ -78,14 +74,13 @@ public class UIManager : MonoBehaviour
     private void UnitProductButtonClicked(UnitType unitType)
     {
         selectedBuilding?.EnqueueUnit(unitType);
-        OnUnitProductButtonClicked?.Invoke(unitType);
     }
 
     public void UpdateButtons(List<GameObject> selectedUnits)
     {
         if (selectedUnits.Count == 0)
         {
-            DisableUnitUI();
+            DisableAllUI();
             return;
         }
         
@@ -99,11 +94,21 @@ public class UIManager : MonoBehaviour
         {
             ActivateSpecificButtons(selectedUnits[0].GetComponent<Character>().UnitType);
         }
+
+        if (selectedUnits.Count == 1 && selectedUnits[0].GetComponent<Character>().UnitType == 0)
+        {
+            BuildingUI.SetActive(true);
+        }
+        else
+        {
+            BuildingUI.SetActive(false);
+        }
     }
     
-    public void DisableUnitUI()
+    public void DisableAllUI()
     {
         unitControlUI.SetActive(false);
+        BuildingUI.SetActive(false);
         SetAllButtonsActive(false);
     }
 
@@ -146,7 +151,7 @@ public class UIManager : MonoBehaviour
     public void ShowBuildingUI(Building building)
     {
         selectedBuilding = building;
-        buildingUI.SetActive(true);
+        unitProductUI.SetActive(true);
         
         foreach (var button in unitProductButtons)
         {
@@ -168,7 +173,7 @@ public class UIManager : MonoBehaviour
     public void HideBuildingUI()
     {
         selectedBuilding = null;
-        buildingUI.SetActive(false);
+        unitProductUI.SetActive(false);
     }
 
     private void ActivateUnitButton(UnitType unitType)
@@ -178,5 +183,10 @@ public class UIManager : MonoBehaviour
         {
             button.button.gameObject.SetActive(true);
         }
+    }
+
+    private void ActiveBuildingButton(int unitType)
+    {
+        
     }
 }

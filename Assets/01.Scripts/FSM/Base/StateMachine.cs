@@ -140,7 +140,13 @@ public class StateMachine<T> : MonoBehaviour where T : Enum
     [SerializeField] private T defaultState;
     
     [SerializeField] private IVMyState _currentMyState;
+    
     private Dictionary<T, IVMyState> _states = new();
+    
+    public IVMyState GetCurrentState()
+    {
+        return _currentMyState;
+    }
     
     StateMachine<T> GetSuperOwnerStateMachile()
     {
