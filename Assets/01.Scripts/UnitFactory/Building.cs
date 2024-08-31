@@ -1,16 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Building : MonoBehaviour
 {
-    protected Queue<UnitType> productionQueue = new Queue<UnitType>();
-    protected bool isProducing = false;
-    public float productionTime = 5f; // 기본 생산 시간
+    public Queue<UnitType> productionQueue = new Queue<UnitType>();
+    public bool isProducing = false;
+    public float productionTime = 5f;
+    public float currentProductionTime = 0f;
+
+    public Sprite icon;
+    public string Name;
+    private UnitHealth _buildingHealth;
 
     private void Start()
     {
+        _buildingHealth = GetComponentInParent<UnitHealth>();
         SelectionManager.Instance.allBuildingList.Add(gameObject);
+    }
+
+    private void Update()
+    {
+        DistructBuilding();
     }
 
     private void OnDestroy()
@@ -18,24 +31,54 @@ public abstract class Building : MonoBehaviour
         SelectionManager.Instance.allBuildingList.Remove(gameObject);
     }
 
-    public abstract void EnqueueUnit(UnitType unitType);
+    public virtual void EnqueueUnit(UnitType unitType)
+    {
+        GameObject unitPrefab = UnitFactory.GetUnitPrefab(unitType);
+        Unit unitComponent = unitPrefab.GetComponent<Unit>();
+
+        if (GameManager.Instance.Gold.Value >= unitComponent.unitCost)
+        {
+            GameManager.Instance.Gold.ApplyChange(-1 * unitComponent.unitCost);
+            productionQueue.Enqueue(unitType);
+            
+            if (!isProducing)
+            {
+                StartCoroutine(ProduceUnit());
+            }
+        }
+        else
+        {
+            Debug.Log($"Not enough gold to produce {unitType}. Required: {unitComponent.unitCost}, Available: {GameManager.Instance.Gold.Value}");
+        }
+    }
 
     protected IEnumerator ProduceUnit()
     {
         while (productionQueue.Count > 0)
         {
             isProducing = true;
-            yield return new WaitForSeconds(productionTime);
+            UnitType unitType = productionQueue.Peek();
+            currentProductionTime = 0f;
 
-            UnitType unitType = productionQueue.Dequeue();
+            while (currentProductionTime < productionTime)
+            {
+                currentProductionTime += Time.deltaTime;
+                yield return null;
+            }
+
             GameObject unit = UnitFactory.CreateUnit(unitType, transform.position + Vector3.forward * 2);
-            
-            // if (unit != null)
-            // {
-            //     SelectionManager.Instance.allUnitsList.Add(unit);
-            // }
+            productionQueue.Dequeue();
 
             isProducing = false;
+            currentProductionTime = 0f;
+        }
+    }
+
+    private void DistructBuilding()
+    {
+        if (_buildingHealth.IsDeath())
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -391,12 +391,31 @@ public class SelectionManager : MonoBehaviour
         UpdateUI();
     }
 
+    // private void BuildingSelect(GameObject building)
+    // {
+    //     DeselectAll();
+    //     buildingSelected = building;
+    //     SelectUnit(building, true);
+    //     UIManager.Instance.ShowUnitProductUI(building.GetComponent<Building>());
+    // }
+    
     private void BuildingSelect(GameObject building)
     {
         DeselectAll();
         buildingSelected = building;
         SelectUnit(building, true);
-        UIManager.Instance.ShowBuildingUI(building.GetComponent<Building>());
+        UIManager.Instance.ShowUnitProductUI(building.GetComponent<Building>());
+
+        // Get the first selected unit (assuming it's the builder)
+        if (unitSelected.Count > 0)
+        {
+            Character builder = unitSelected[0].GetComponent<Character>();
+            if (builder != null)
+            {
+                // Start the building process
+                builder.BuildStructure(building, building.transform.position);
+            }
+        }
     }
 
     private void MultipleSelect(GameObject unit)
@@ -465,7 +484,7 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
-    private void MoveSelectedUnits(Vector3 targetPosition)
+    public void MoveSelectedUnits(Vector3 targetPosition)
     {
         Vector3 groupCenter = CalculateGroupCenter();
 

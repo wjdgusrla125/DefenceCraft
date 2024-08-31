@@ -2,18 +2,15 @@ using UnityEngine;
 
 public class PreviewSystem : MonoBehaviour
 {
-    [SerializeField] 
-    private float previewYOffset = 0.06f;
-    
-    [SerializeField] 
-    private GameObject cellIndicator;
+    [SerializeField] private float previewYOffset = 0.06f;
+    [SerializeField] private GameObject cellIndicator;
     private GameObject previewObject;
 
-    [SerializeField] 
-    private Material previewMaterialsPrefab;
+    [SerializeField] private Material previewMaterialsPrefab;
     private Material previewMaterialInstance;
 
     private Renderer cellIndicatorRenderer;
+    private Vector2Int currentSize;
 
     private void Start()
     {
@@ -53,6 +50,7 @@ public class PreviewSystem : MonoBehaviour
     
     private void PrepareCursor(Vector2Int size)
     {
+        currentSize = size;
         if (size.x > 0 || size.y > 0)
         {
             cellIndicator.transform.localScale = new Vector3(size.x, 1, size.y);
@@ -62,10 +60,9 @@ public class PreviewSystem : MonoBehaviour
     
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
-        
         previewObject = Instantiate(prefab);
         PreparePreview(previewObject);
-        PrepareCursor(size/2);
+        PrepareCursor(size);
         cellIndicator.SetActive(true);
     }
     
@@ -108,5 +105,20 @@ public class PreviewSystem : MonoBehaviour
         cellIndicator.SetActive(true);
         PrepareCursor(Vector2Int.one);
         ApplyFeedbackToCursor(false);
+    }
+
+    public void RotatePreview(float angle)
+    {
+        if (previewObject != null)
+        {
+            previewObject.transform.rotation = Quaternion.Euler(0, angle, 0);
+        }
+    }
+
+    public void UpdatePreviewSize(Vector2Int newSize)
+    {
+        currentSize = newSize;
+        cellIndicator.transform.localScale = new Vector3(newSize.x, 1, newSize.y);
+        cellIndicatorRenderer.material.mainTextureScale = newSize;
     }
 }

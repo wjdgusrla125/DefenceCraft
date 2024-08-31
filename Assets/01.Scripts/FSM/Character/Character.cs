@@ -19,6 +19,7 @@ public class Character : CharacterBase<FSM_Character>
     private Vector3 moveTarget;
     private NavMeshAgent _agent;
     public UnitHealth _unitHealth;
+    public UnitMana _unitMana;
     
     public IntVariable resourceVariable;
     
@@ -47,6 +48,7 @@ public class Character : CharacterBase<FSM_Character>
         _animator = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         _unitHealth = GetComponent<UnitHealth>();
+        _unitMana = GetComponent<UnitMana>();
         
         _agent.acceleration = 8;
         _agent.angularSpeed = 360;
@@ -214,12 +216,24 @@ public class Character : CharacterBase<FSM_Character>
         }
     }
     
+    // public void ResetSkillAndMove(Vector3 destination)
+    // {
+    //     activeSkillInstance.target = null;
+    //     activeSkillInstance = null;
+    //     skillInstances.Clear();
+    //     Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Move);
+    // }
+    
     public void ResetSkillAndMove(Vector3 destination)
     {
-        activeSkillInstance.target = null;
-        activeSkillInstance = null;
-        skillInstances.Clear();
+        if (activeSkillInstance != null)
+        {
+            activeSkillInstance.target = null;
+            activeSkillInstance = null;
+            skillInstances.Clear();
+        }
         Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Move);
+        SetDestination(destination);
     }
 
     public void CheckArrivalAndHandleState()
@@ -241,10 +255,15 @@ public class Character : CharacterBase<FSM_Character>
     {
         if (SelectionManager.Instance.unitSelected.Contains(this.gameObject))
         {
-            if (skillIndex == 2)
+            if (skillIndex == 1 && _unitMana.currrentUnitMP >= 70f)
             {
+                Debug.Log("click");
                 UseSkillOnResource(null);
                 Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_MagicSkill);
+            }
+            else if (skillIndex == 0)
+            {
+                UIManager.Instance.ShowBuildingUI(this);
             }
         }
     }
@@ -253,6 +272,7 @@ public class Character : CharacterBase<FSM_Character>
     {
         if (activeSkillInstance != null && activeSkillInstance.info.SkillPrefab != null)
         {
+            _unitMana.UseMP(50f);
             Instantiate(activeSkillInstance.info.SkillPrefab, targetPosition, Quaternion.identity);
             Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Idle);
         }
@@ -266,6 +286,30 @@ public class Character : CharacterBase<FSM_Character>
         if (_unitHealth.IsDeath())
         {
             Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Dead);
+        }
+    }
+    
+    //
+    public void BuildStructure(GameObject prefab, Vector3 position)
+    {
+        SetDestination(position);
+        Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Move);
+        StartCoroutine(BuildStructureCoroutine(prefab, position));
+    }
+
+    private IEnumerator BuildStructureCoroutine(GameObject prefab, Vector3 position)
+    {
+        // Wait until the character reaches the building position
+        while (Vector3.Distance(transform.position, position) > 1f)
+        {
+            yield return null;
+        }
+
+        // Start building
+        ObjectPlacer objectPlacer = FindObjectOfType<ObjectPlacer>();
+        if (objectPlacer != null)
+        {
+            objectPlacer.PlaceObject(prefab, position, this);
         }
     }
 }

@@ -23,7 +23,7 @@ public static class UnitFactory
         return null;
     }
 
-    private static GameObject GetUnitPrefab(UnitType unitType)
+    public static GameObject GetUnitPrefab(UnitType unitType)
     {
         string prefabPath = "Unit/";
         

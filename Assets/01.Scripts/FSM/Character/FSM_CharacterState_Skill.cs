@@ -84,7 +84,6 @@ public class FSM_CharacterState_Skill : VMyState<FSM_CharacterState>
             if (_character.resourceVariable != null)
             {
                 _character.resourceVariable.ApplyChange(10);
-                //Debug.Log($"Resource increased. New value: {_character.resourceVariable.Value}");
             }
         }
     }

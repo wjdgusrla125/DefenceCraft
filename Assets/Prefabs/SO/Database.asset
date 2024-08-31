@@ -17,23 +17,29 @@ MonoBehaviour:
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 6, y: 10}
     <Prefab>k__BackingField: {fileID: 8147337634547332994, guid: 1cc83de02ef2d4d4e868e17de29b05aa, type: 3}
+    <Cost>k__BackingField: 10
   - <Name>k__BackingField: gate
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 6, y: 16}
     <Prefab>k__BackingField: {fileID: 8014414290795594449, guid: ef6262f5131f38f40a574910daae13c7, type: 3}
+    <Cost>k__BackingField: 20
   - <Name>k__BackingField: tower
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 12, y: 12}
     <Prefab>k__BackingField: {fileID: 8147163015222054857, guid: 54b4946f4bf8ab44fbba16b369080f14, type: 3}
+    <Cost>k__BackingField: 30
   - <Name>k__BackingField: test
     <ID>k__BackingField: 4
     <Size>k__BackingField: {x: 2, y: 2}
     <Prefab>k__BackingField: {fileID: 3147484589466030463, guid: 822dd91e3fc4a954cb6aaa62221e3bb7, type: 3}
+    <Cost>k__BackingField: 40
   - <Name>k__BackingField: Barrack
     <ID>k__BackingField: 5
     <Size>k__BackingField: {x: 8, y: 8}
     <Prefab>k__BackingField: {fileID: 3426841481156988327, guid: 5b94b5f60329d434ab391e2fb05e1b42, type: 3}
+    <Cost>k__BackingField: 50
   - <Name>k__BackingField: MagicTower
     <ID>k__BackingField: 6
     <Size>k__BackingField: {x: 8, y: 8}
     <Prefab>k__BackingField: {fileID: 6801827707905867176, guid: b639ab2b55529ba4cbec4d5485ab6a20, type: 3}
+    <Cost>k__BackingField: 60

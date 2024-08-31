@@ -8,10 +8,22 @@ public class MagicTowers : Building
     {
         if (unitType == UnitType.Mage)
         {
-            productionQueue.Enqueue(unitType);
-            if (!isProducing)
+            GameObject unitPrefab = UnitFactory.GetUnitPrefab(unitType);
+            Unit unitComponent = unitPrefab.GetComponent<Unit>();
+
+            if (GameManager.Instance.Gold.Value >= unitComponent.unitCost)
             {
-                StartCoroutine(ProduceUnit());
+                GameManager.Instance.Gold.ApplyChange(-1 * unitComponent.unitCost);
+                productionQueue.Enqueue(unitType);
+                
+                if (!isProducing)
+                {
+                    StartCoroutine(ProduceUnit());
+                }
+            }
+            else
+            {
+                Debug.Log($"Not enough gold to produce {unitType}. Required: {unitComponent.unitCost}, Available: {GameManager.Instance.Gold.Value}");
             }
         }
     }

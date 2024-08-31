@@ -62,6 +62,11 @@ public class DamageField : MonoBehaviour
                 Debug.Log($"target : {targetCollider.gameObject}");
                 EApplyDamage(targetCollider.gameObject);
             }
+            else if (targetCollider.gameObject.layer == LayerMask.NameToLayer("Building"))
+            {
+                Debug.Log($"target : {targetCollider.gameObject}");
+                BApplyDamage(targetCollider.gameObject);
+            }
 
             yield return new WaitForSeconds(_damageInterval);
         }
@@ -70,7 +75,8 @@ public class DamageField : MonoBehaviour
     private bool ShouldStartDamageCoroutine(Collider other)
     {
         bool isValidTarget = other.gameObject.layer == LayerMask.NameToLayer("Enemy") || 
-                             other.gameObject.layer == LayerMask.NameToLayer("Clickable");
+                             other.gameObject.layer == LayerMask.NameToLayer("Clickable") ||
+                             other.gameObject.layer == LayerMask.NameToLayer("Building");
         return isValidTarget;
     }
 
@@ -104,6 +110,18 @@ public class DamageField : MonoBehaviour
         else
         {
             Debug.Log("No Character");
+        }
+    }
+
+    private void BApplyDamage(GameObject target)
+    {
+        UnitHealth buildingHealth = target.GetComponentInParent<UnitHealth>();
+
+        if (buildingHealth != null)
+        {
+            float damage = _enemyCharacter != null ? _enemyCharacter.damage : 0f;
+            
+            buildingHealth.HPTakeDamage(damage);
         }
     }
 }
