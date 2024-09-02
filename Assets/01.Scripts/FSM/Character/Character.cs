@@ -290,26 +290,26 @@ public class Character : CharacterBase<FSM_Character>
     }
     
     //
-    public void BuildStructure(GameObject prefab, Vector3 position)
-    {
-        SetDestination(position);
-        Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Move);
-        StartCoroutine(BuildStructureCoroutine(prefab, position));
-    }
-
-    private IEnumerator BuildStructureCoroutine(GameObject prefab, Vector3 position)
-    {
-        // Wait until the character reaches the building position
-        while (Vector3.Distance(transform.position, position) > 1f)
-        {
-            yield return null;
-        }
-
-        // Start building
-        ObjectPlacer objectPlacer = FindObjectOfType<ObjectPlacer>();
-        if (objectPlacer != null)
-        {
-            objectPlacer.PlaceObject(prefab, position, this);
-        }
-    }
+    // public void BuildStructure(GameObject prefab, Vector3 position, int rotation)
+    // {
+    //     SetDestination(position);
+    //     Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Move);
+    //     StartCoroutine(BuildStructureCoroutine(prefab, position, rotation));
+    // }
+    //
+    // private IEnumerator BuildStructureCoroutine(GameObject prefab, Vector3 position, int rotation)
+    // {
+    //     // Wait until the character reaches the building position
+    //     while (Vector3.Distance(transform.position, position) > 1f)
+    //     {
+    //         yield return null;
+    //     }
+    //
+    //     // Start building
+    //     ObjectPlacer objectPlacer = FindObjectOfType<ObjectPlacer>();
+    //     if (objectPlacer != null)
+    //     {
+    //         objectPlacer.PlaceObject(prefab, position, this, rotation);
+    //     }
+    // }
 }

@@ -6,30 +6,24 @@ using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private Camera sceneCamara;
-
-    [SerializeField] private LayerMask placementLayerMask;
+    [SerializeField]
+    private Camera sceneCamera;
 
     private Vector3 lastPosition;
+
+    [SerializeField]
+    private LayerMask placementLayermask;
 
     public event Action OnClicked, OnExit, OnRotate;
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
+        if(Input.GetMouseButtonDown(0))
             OnClicked?.Invoke();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
+        if(Input.GetKeyDown(KeyCode.Escape))
             OnExit?.Invoke();
-        }
-
         if (Input.GetKeyDown(KeyCode.R))
-        {
             OnRotate?.Invoke();
-        }
     }
 
     public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
@@ -37,16 +31,13 @@ public class InputManager : MonoBehaviour
     public Vector3 GetSelectedMapPosition()
     {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = sceneCamara.nearClipPlane;
-
-        Ray ray = sceneCamara.ScreenPointToRay(mousePos);
+        mousePos.z = sceneCamera.nearClipPlane;
+        Ray ray = sceneCamera.ScreenPointToRay(mousePos);
         RaycastHit hit;
-
-        if (Physics.Raycast(ray,out hit, 100, placementLayerMask))
+        if (Physics.Raycast(ray, out hit, 100, placementLayermask))
         {
             lastPosition = hit.point;
         }
-
         return lastPosition;
     }
 }

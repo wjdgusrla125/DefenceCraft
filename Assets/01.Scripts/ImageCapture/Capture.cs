@@ -62,7 +62,7 @@ public class Capture : MonoBehaviour
         yield return null;
 
         var data = tex.EncodeToPNG();
-        string name = "Thumbnail";
+        string name = $"Thumbnail_{obj[nowcnt].gameObject.name}";
         string extention = ".png";
         string path = Application.persistentDataPath + "/Thumbnail/";
         
@@ -120,7 +120,8 @@ public class Capture : MonoBehaviour
         switch (grade)
         {
             case Grade.Normal:
-                cam.backgroundColor = Color.white;
+                cam.clearFlags = CameraClearFlags.SolidColor;  // Ensure the camera clears with a solid color
+                cam.backgroundColor = new Color(1, 1, 1, 0);   // Set background color to fully transparent white
                 bg.color = Color.white;
                 break;
             case Grade.Uncommon:

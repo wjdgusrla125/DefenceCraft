@@ -390,14 +390,6 @@ public class SelectionManager : MonoBehaviour
         SelectUnit(unit, true);
         UpdateUI();
     }
-
-    // private void BuildingSelect(GameObject building)
-    // {
-    //     DeselectAll();
-    //     buildingSelected = building;
-    //     SelectUnit(building, true);
-    //     UIManager.Instance.ShowUnitProductUI(building.GetComponent<Building>());
-    // }
     
     private void BuildingSelect(GameObject building)
     {
@@ -407,15 +399,15 @@ public class SelectionManager : MonoBehaviour
         UIManager.Instance.ShowUnitProductUI(building.GetComponent<Building>());
 
         // Get the first selected unit (assuming it's the builder)
-        if (unitSelected.Count > 0)
-        {
-            Character builder = unitSelected[0].GetComponent<Character>();
-            if (builder != null)
-            {
-                // Start the building process
-                builder.BuildStructure(building, building.transform.position);
-            }
-        }
+        // if (unitSelected.Count > 0)
+        // {
+        //     Character builder = unitSelected[0].GetComponent<Character>();
+        //     if (builder != null)
+        //     {
+        //         // Start the building process
+        //         builder.BuildStructure(building, building.transform.position,90);
+        //     }
+        // }
     }
 
     private void MultipleSelect(GameObject unit)

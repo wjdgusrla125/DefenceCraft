@@ -17,6 +17,7 @@ public abstract class Building : MonoBehaviour
 
     private void Start()
     {
+        //만약 데미지 안들어올경우 여기 수정
         _buildingHealth = GetComponentInParent<UnitHealth>();
         SelectionManager.Instance.allBuildingList.Add(gameObject);
     }
@@ -33,23 +34,23 @@ public abstract class Building : MonoBehaviour
 
     public virtual void EnqueueUnit(UnitType unitType)
     {
-        GameObject unitPrefab = UnitFactory.GetUnitPrefab(unitType);
-        Unit unitComponent = unitPrefab.GetComponent<Unit>();
-
-        if (GameManager.Instance.Gold.Value >= unitComponent.unitCost)
-        {
-            GameManager.Instance.Gold.ApplyChange(-1 * unitComponent.unitCost);
-            productionQueue.Enqueue(unitType);
-            
-            if (!isProducing)
-            {
-                StartCoroutine(ProduceUnit());
-            }
-        }
-        else
-        {
-            Debug.Log($"Not enough gold to produce {unitType}. Required: {unitComponent.unitCost}, Available: {GameManager.Instance.Gold.Value}");
-        }
+        // GameObject unitPrefab = UnitFactory.GetUnitPrefab(unitType);
+        // Unit unitComponent = unitPrefab.GetComponent<Unit>();
+        //
+        // if (GameManager.Instance.Gold.Value >= unitComponent.unitCost)
+        // {
+        //     GameManager.Instance.Gold.ApplyChange(-1 * unitComponent.unitCost);
+        //     productionQueue.Enqueue(unitType);
+        //     
+        //     if (!isProducing)
+        //     {
+        //         StartCoroutine(ProduceUnit());
+        //     }
+        // }
+        // else
+        // {
+        //     Debug.Log($"Not enough gold to produce {unitType}. Required: {unitComponent.unitCost}, Available: {GameManager.Instance.Gold.Value}");
+        // }
     }
 
     protected IEnumerator ProduceUnit()

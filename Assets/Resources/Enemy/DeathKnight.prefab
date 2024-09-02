@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 5375817758961895703}
   - component: {fileID: 5227311568562046603}
   m_Layer: 13
-  m_Name: Circle (4)
+  m_Name: MiniMapCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -517,7 +517,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.03518956, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1111,7 +1111,7 @@ GameObject:
   - component: {fileID: 7670595057710957501}
   - component: {fileID: 5367368654386163573}
   m_Layer: 5
-  m_Name: Canvas (5)
+  m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

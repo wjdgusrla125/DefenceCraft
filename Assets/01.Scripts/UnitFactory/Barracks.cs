@@ -6,7 +6,7 @@ public class Barracks : Building
 {
     public override void EnqueueUnit(UnitType unitType)
     {
-        if (unitType == UnitType.Workers || unitType == UnitType.SpearMan || unitType == UnitType.Archers)
+        if (unitType == UnitType.SpearMan || unitType == UnitType.Archers)
         {
             GameObject unitPrefab = UnitFactory.GetUnitPrefab(unitType);
             Unit unitComponent = unitPrefab.GetComponent<Unit>();
