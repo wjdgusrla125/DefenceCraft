@@ -117,15 +117,6 @@ public class UIManager : MonoBehaviour
         {
             ActivateSpecificButtons(selectedUnits[0].GetComponent<Character>().UnitType);
         }
-
-        // if (selectedUnits.Count == 1 && selectedUnits[0].GetComponent<Character>().UnitType == 0)
-        // {
-        //     BuildingUI.SetActive(true);
-        // }
-        // else
-        // {
-        //     BuildingUI.SetActive(false);
-        // }
     }
     
     public void DisableAllUI()
@@ -196,13 +187,16 @@ public class UIManager : MonoBehaviour
 
         if (building is Barracks)
         {
-            ActivateUnitButton(UnitType.Workers);
             ActivateUnitButton(UnitType.Archers);
             ActivateUnitButton(UnitType.SpearMan);
         }
         else if (building is MagicTowers)
         {
             ActivateUnitButton(UnitType.Mage);
+        }
+        else if (building is Castle)
+        {
+            ActivateUnitButton(UnitType.Workers);
         }
     }
     

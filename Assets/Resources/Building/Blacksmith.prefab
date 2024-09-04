@@ -497,6 +497,8 @@ GameObject:
   - component: {fileID: 5197456828186677193}
   - component: {fileID: 756538118366412531}
   - component: {fileID: 7063253820463640750}
+  - component: {fileID: 1191830449585549051}
+  - component: {fileID: 8097183955386269766}
   m_Layer: 11
   m_Name: Blacksmith
   m_TagString: Untagged
@@ -561,6 +563,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currrentUnitHP: 0
   MaxUnitHP: 500
+--- !u!65 &1191830449585549051
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5234327580382468683}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 10, z: 15}
+  m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &8097183955386269766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5234327580382468683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f679d2542968b349aa4d8379aaff732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRange: 15
+  sightHeight: 1
 --- !u!1 &6988846552368441942
 GameObject:
   m_ObjectHideFlags: 0

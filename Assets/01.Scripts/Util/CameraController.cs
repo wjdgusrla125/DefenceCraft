@@ -12,8 +12,8 @@ public class CameraController : MonoBehaviour
     private float zoomSpeed = 1000f;
     private float rotationSpeed = 30f;
     private float minZoomDistance = 10f;  // 최소 확대 거리
-    private float maxZoomDistance = 40f;  // 최대 확대 거리
-    private float minYRotation = 35f;
+    private float maxZoomDistance = 45f;  // 최대 확대 거리
+    private float minYRotation = 45f;
     private float maxYRotation = 60f;
 
     private Vector3 dragOrigin;

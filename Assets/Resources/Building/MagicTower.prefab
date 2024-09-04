@@ -2300,6 +2300,7 @@ GameObject:
   - component: {fileID: 7126758735655317232}
   - component: {fileID: 4011316695854926715}
   - component: {fileID: 1127806083392808986}
+  - component: {fileID: 1179296582014758614}
   m_Layer: 11
   m_Name: MagicTower
   m_TagString: Untagged
@@ -2457,8 +2458,22 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 30, z: 5}
+  m_Size: {x: 8, y: 30, z: 8}
   m_Center: {x: 0, y: 15, z: 0}
+--- !u!114 &1179296582014758614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557568412387135820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f679d2542968b349aa4d8379aaff732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRange: 15
+  sightHeight: 1
 --- !u!1 &1898207221280170083
 GameObject:
   m_ObjectHideFlags: 0
