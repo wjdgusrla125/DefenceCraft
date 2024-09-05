@@ -11,6 +11,8 @@ public class DamageField : MonoBehaviour
     private float _damageInterval = 1.5f;
 
     private Coroutine _damageCoroutine;
+    
+    private Collider _currentTarget;
 
     private void Awake()
     {
@@ -42,10 +44,9 @@ public class DamageField : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (_damageCoroutine != null)
+        if (_damageCoroutine != null && other == _currentTarget)
         {
-            StopCoroutine(_damageCoroutine);
-            _damageCoroutine = null;
+            StopDamageCoroutine();
         }
     }
 
@@ -53,13 +54,18 @@ public class DamageField : MonoBehaviour
     {
         while (true)
         {
+            if (targetCollider == null || !targetCollider.gameObject.activeInHierarchy)
+            {
+                StopDamageCoroutine();
+                yield break;
+            }
+            
             if (targetCollider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 ApplyDamage(targetCollider.gameObject);
             }
             else if (targetCollider.gameObject.layer == LayerMask.NameToLayer("Clickable"))
             {
-                Debug.Log($"target : {targetCollider.gameObject}");
                 EApplyDamage(targetCollider.gameObject);
             }
             else if (targetCollider.gameObject.layer == LayerMask.NameToLayer("Building"))
@@ -69,6 +75,16 @@ public class DamageField : MonoBehaviour
             }
 
             yield return new WaitForSeconds(_damageInterval);
+        }
+    }
+    
+    private void StopDamageCoroutine()
+    {
+        if (_damageCoroutine != null)
+        {
+            StopCoroutine(_damageCoroutine);
+            _damageCoroutine = null;
+            _currentTarget = null;
         }
     }
 

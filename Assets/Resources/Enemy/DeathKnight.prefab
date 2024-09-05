@@ -1485,6 +1485,7 @@ GameObject:
   - component: {fileID: 2759398127015367423}
   - component: {fileID: 3798931612390682479}
   - component: {fileID: 9148062420093673862}
+  - component: {fileID: 693380382640632459}
   - component: {fileID: 1921701530958818787}
   m_Layer: 9
   m_Name: DeathKnight
@@ -1548,7 +1549,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 3
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1618,12 +1619,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a1f99fdd3fdc64dba506b93c2d71a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyHealth: {fileID: 0}
   nexusTarget: {fileID: 0}
   detectionRange: 10
   attackDistance: 3
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 2176
   damage: 10
   rotationSpeed: 5
 --- !u!114 &317021355675465659
@@ -1673,6 +1675,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f616c194554afa64eb06518c25937034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &693380382640632459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573503065731276406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ffd06e31832ea419efbf9e22169be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1921701530958818787

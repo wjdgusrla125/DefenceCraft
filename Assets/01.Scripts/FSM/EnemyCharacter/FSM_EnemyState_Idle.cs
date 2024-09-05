@@ -19,7 +19,10 @@ public class FSM_EnemyState_Idle : VMyState<FSM_EnemyState>
 
     protected override void ExcuteState()
     {
-        
+        if (_enemyCharacter._enemyHealth.IsDeath())
+        {
+            _enemyCharacter.Fsm.ChangeState(FSM_EnemyState.FSM_EnemyState_Dead);
+        }
     }
 
     protected override void ExitState()

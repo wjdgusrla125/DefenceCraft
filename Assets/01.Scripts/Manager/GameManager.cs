@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public IntVariable Gold;
-    public IntVariable Population;
+
+    public GameObject Nexus;
     
     private void Awake()
     {
@@ -20,6 +21,15 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (Nexus == null)
+        {
+            Debug.Log("게임 종료");
+            //게임 종료 설정
         }
     }
 }

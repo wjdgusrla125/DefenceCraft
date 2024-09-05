@@ -10,7 +10,7 @@ public class EnemyCharacter : CharacterBase<FSM_Enemy>
     [NonSerialized] public Animator _animator;
 
     private NavMeshAgent _agent;
-    private EnemyHealth _enemyHealth;
+    public EnemyHealth _enemyHealth;
 
     public Transform nexusTarget;
     public float detectionRange = 10f;
@@ -33,6 +33,11 @@ public class EnemyCharacter : CharacterBase<FSM_Enemy>
         _enemyHealth = GetComponent<EnemyHealth>();
         
         _agent.updateRotation = false;
+    }
+
+    private void Start()
+    {
+        nexusTarget = GameManager.Instance.Nexus.transform;
     }
 
     public void DetectTarget()

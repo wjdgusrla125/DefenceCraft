@@ -1144,7 +1144,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7129331738223025744}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 6
   m_Acceleration: 8
@@ -1248,6 +1248,7 @@ MonoBehaviour:
   _unitHealth: {fileID: 0}
   _unitMana: {fileID: 0}
   resourceVariable: {fileID: 0}
+  MagicCircle: {fileID: 1182614328576822, guid: 1205099e4d473fd46a9de5fcc1037aaa, type: 3}
 --- !u!114 &5667851561910716476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1292,7 +1293,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7129331738223025744}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c67ff89e371646c409635af27dea664f, type: 3}
   m_Name: 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.AI;
@@ -22,6 +23,7 @@ public class Character : CharacterBase<FSM_Character>
     public UnitMana _unitMana;
     
     public IntVariable resourceVariable;
+    public GameObject MagicCircle;
     
     public static readonly int IdleHash = Animator.StringToHash("Idle");
     public static readonly int MoveHash = Animator.StringToHash("Move");
@@ -216,14 +218,6 @@ public class Character : CharacterBase<FSM_Character>
         }
     }
     
-    // public void ResetSkillAndMove(Vector3 destination)
-    // {
-    //     activeSkillInstance.target = null;
-    //     activeSkillInstance = null;
-    //     skillInstances.Clear();
-    //     Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Move);
-    // }
-    
     public void ResetSkillAndMove(Vector3 destination)
     {
         if (activeSkillInstance != null)
@@ -277,6 +271,8 @@ public class Character : CharacterBase<FSM_Character>
             Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Idle);
         }
     }
+
+    
     
     //데미지
     public void TakeDamage(float damage)
@@ -288,28 +284,4 @@ public class Character : CharacterBase<FSM_Character>
             Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Dead);
         }
     }
-    
-    //
-    // public void BuildStructure(GameObject prefab, Vector3 position, int rotation)
-    // {
-    //     SetDestination(position);
-    //     Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Move);
-    //     StartCoroutine(BuildStructureCoroutine(prefab, position, rotation));
-    // }
-    //
-    // private IEnumerator BuildStructureCoroutine(GameObject prefab, Vector3 position, int rotation)
-    // {
-    //     // Wait until the character reaches the building position
-    //     while (Vector3.Distance(transform.position, position) > 1f)
-    //     {
-    //         yield return null;
-    //     }
-    //
-    //     // Start building
-    //     ObjectPlacer objectPlacer = FindObjectOfType<ObjectPlacer>();
-    //     if (objectPlacer != null)
-    //     {
-    //         objectPlacer.PlaceObject(prefab, position, this, rotation);
-    //     }
-    // }
 }

@@ -51,6 +51,7 @@ public class UIManager : MonoBehaviour
     public GameObject unitProductUI;
     public GameObject unitControlUI;
     public GameObject BuildingUI;
+    public TextMeshProUGUI goldText;
     
     public DisplayUI displayUI;
     
@@ -90,6 +91,7 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         UpdateDisplayUI();
+        UpdateResource();
     }
 
     private void SkillButtonClicked(int skillIndex)
@@ -128,6 +130,7 @@ public class UIManager : MonoBehaviour
         displayUI.soloUnitDP.SetActive(false);
         displayUI.multUnitDP.SetActive(false);
         displayUI.buildingDP.SetActive(false);
+        displayUI.buildingUnitProductDP.SetActive(false);
     }
 
     private void EnableUnitUI()
@@ -325,21 +328,21 @@ public class UIManager : MonoBehaviour
 
         Unit unitComponent = unit.GetComponent<Unit>();
         UnitHealth unitHealth = unit.GetComponent<UnitHealth>();
-        //UnitMana unitMana = unit.GetComponent<UnitMana>();
+        UnitMana unitMana = unit.GetComponent<UnitMana>();
 
         displayUI.unitImage.sprite = unitComponent.icon;
         displayUI.unitName.text = unitComponent.Name;
         displayUI.unitHp.text = $"HP: {unitHealth.currrentUnitHP}/{unitHealth.MaxUnitHP}";
         
-        // if (unitMana != null)
-        // {
-        //     displayUI.unitMp.gameObject.SetActive(true);
-        //     displayUI.unitMp.text = $"MP: {unitMana.CurrentMp}/{unitMana.MaxMp}";
-        // }
-        // else
-        // {
-        //     displayUI.unitMp.gameObject.SetActive(false);
-        // }
+        if (unitMana != null)
+        {
+            displayUI.unitMp.gameObject.SetActive(true);
+            displayUI.unitMp.text = $"MP: {unitMana.currrentUnitMP}/{unitMana.MaxUnitMP}";
+        }
+        else
+        {
+            displayUI.unitMp.gameObject.SetActive(false);
+        }
     }
 
     private void UpdateMultipleUnitDisplay(List<GameObject> units)
@@ -361,5 +364,10 @@ public class UIManager : MonoBehaviour
                 displayUI.unitImages[i].gameObject.SetActive(false);
             }
         }
+    }
+
+    private void UpdateResource()
+    {
+        goldText.text = $"{GameManager.Instance.Gold.Value}";
     }
 }       

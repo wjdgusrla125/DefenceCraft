@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 6901070566630308827}
   - component: {fileID: 7978444940205030425}
   - component: {fileID: 6086951621253086192}
+  - component: {fileID: -8683667503201982924}
   m_Layer: 11
   m_Name: BlackWall
   m_TagString: Untagged
@@ -162,6 +163,7 @@ MonoBehaviour:
   currentProductionTime: 0
   icon: {fileID: 21300000, guid: 23a5862dd9c0e97438dcb3358b009599, type: 3}
   Name: Wall
+  buildingType: 3
 --- !u!114 &6901070566630308827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +213,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightRange: 15
   sightHeight: 1
+--- !u!208 &-8683667503201982924
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4293633657258281268}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.25, y: 3, z: 0.6}
+  m_MoveThreshold: 0
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 3, z: 0}
+  m_TimeToStationary: 0
 --- !u!1 &5750290379661345688
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 40853526904183073}
   - component: {fileID: 5804275082509989797}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SelectCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

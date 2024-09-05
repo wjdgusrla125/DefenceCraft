@@ -4,6 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum BuildingType
+{
+    None,
+    Castle,
+    Barrack,
+    Wall,
+    MagicTower
+}
+
 public abstract class Building : MonoBehaviour
 {
     public Queue<UnitType> productionQueue = new Queue<UnitType>();
@@ -14,6 +23,8 @@ public abstract class Building : MonoBehaviour
     public Sprite icon;
     public string Name;
     private UnitHealth _buildingHealth;
+
+    public BuildingType buildingType;
 
     private void Start()
     {
@@ -34,23 +45,7 @@ public abstract class Building : MonoBehaviour
 
     public virtual void EnqueueUnit(UnitType unitType)
     {
-        // GameObject unitPrefab = UnitFactory.GetUnitPrefab(unitType);
-        // Unit unitComponent = unitPrefab.GetComponent<Unit>();
-        //
-        // if (GameManager.Instance.Gold.Value >= unitComponent.unitCost)
-        // {
-        //     GameManager.Instance.Gold.ApplyChange(-1 * unitComponent.unitCost);
-        //     productionQueue.Enqueue(unitType);
-        //     
-        //     if (!isProducing)
-        //     {
-        //         StartCoroutine(ProduceUnit());
-        //     }
-        // }
-        // else
-        // {
-        //     Debug.Log($"Not enough gold to produce {unitType}. Required: {unitComponent.unitCost}, Available: {GameManager.Instance.Gold.Value}");
-        // }
+        
     }
 
     protected IEnumerator ProduceUnit()

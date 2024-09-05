@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -29,6 +30,14 @@ public class PlacementSystem : MonoBehaviour
 
     IBuildingState buildingState;
     
+    private Dictionary<BuildingType, List<BuildingType>> buildingDependencies = new Dictionary<BuildingType, List<BuildingType>>
+    {
+        { BuildingType.Barrack, new List<BuildingType> { BuildingType.Castle } },
+        { BuildingType.Wall, new List<BuildingType> { BuildingType.Barrack } },
+        { BuildingType.MagicTower, new List<BuildingType> { BuildingType.Barrack } }
+        
+    };
+    
     private void Start()
     {
         gridVisualization.SetActive(false);
@@ -38,12 +47,38 @@ public class PlacementSystem : MonoBehaviour
     public void StartPlacement(int ID)
     {
         StopPlacement();
+        BuildingType buildingType = GetBuildingTypeFromID(ID);
+        if (!CanPlaceBuilding(buildingType))
+        {
+            Debug.Log($"Cannot place {buildingType}. Required buildings are not present.");
+            return;
+        }
         gridVisualization.SetActive(true);
         buildingState = new PlacementState(ID, grid, preview, database, furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
         inputManager.OnRotate += RotateStructure;
 
+    }
+    
+    private bool CanPlaceBuilding(BuildingType buildingType)
+    {
+        if (!buildingDependencies.ContainsKey(buildingType)) return true;
+        
+        foreach (BuildingType requiredType in buildingDependencies[buildingType])
+        {
+            bool requiredBuildingExists = SelectionManager.Instance.allBuildingList
+                .Any(building => building.GetComponent<Building>()?.buildingType == requiredType);
+
+            if (!requiredBuildingExists) return false;
+        }
+
+        return true;
+    }
+    
+    private BuildingType GetBuildingTypeFromID(int ID)
+    {
+        return database.objectsData.Find(data => data.ID == ID)?.Prefab.GetComponent<Building>()?.buildingType ?? BuildingType.None;
     }
 
     public void StartRemoving()

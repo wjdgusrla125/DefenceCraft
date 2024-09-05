@@ -20,6 +20,11 @@ public class FSM_EnemyState_Attack : VMyState<FSM_EnemyState>
 
     protected override void ExcuteState()
     {
+        if (_enemyCharacter._enemyHealth.IsDeath())
+        {
+            _enemyCharacter.Fsm.ChangeState(FSM_EnemyState.FSM_EnemyState_Dead);
+        }
+        
         if (Time.time - lastAttackTime >= attackCooldown)
         {
             lastAttackTime = Time.time;
