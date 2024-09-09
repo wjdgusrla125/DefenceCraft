@@ -25,12 +25,16 @@ public abstract class Building : MonoBehaviour
     private UnitHealth _buildingHealth;
 
     public BuildingType buildingType;
+    
+    public float constructionTime = 10f;
 
     private void Start()
     {
         //만약 데미지 안들어올경우 여기 수정
         _buildingHealth = GetComponentInParent<UnitHealth>();
         SelectionManager.Instance.allBuildingList.Add(gameObject);
+
+        SetConstructionTime();
     }
 
     private void Update()
@@ -76,5 +80,32 @@ public abstract class Building : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    
+    private void SetConstructionTime()
+    {
+        switch (buildingType)
+        {
+            case BuildingType.Castle:
+                constructionTime = 20f;
+                break;
+            case BuildingType.Barrack:
+                constructionTime = 15f;
+                break;
+            case BuildingType.Wall:
+                constructionTime = 10f;
+                break;
+            case BuildingType.MagicTower:
+                constructionTime = 18f;
+                break;
+            default:
+                constructionTime = 10f;
+                break;
+        }
+    }
+    
+    public float GetConstructionTime()
+    {
+        return constructionTime;
     }
 }

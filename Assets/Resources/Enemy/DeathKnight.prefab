@@ -1109,7 +1109,7 @@ GameObject:
   - component: {fileID: 7335115084570547805}
   - component: {fileID: 8901927026433445470}
   - component: {fileID: 7670595057710957501}
-  - component: {fileID: 5367368654386163573}
+  - component: {fileID: 3442156349639578172}
   m_Layer: 5
   m_Name: HPBar
   m_TagString: Untagged
@@ -1200,7 +1200,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5367368654386163573
+--- !u!114 &3442156349639578172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1209,7 +1209,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7283915817071262027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317e44ff3c88e4842b5757f141ec0a50, type: 3}
+  m_Script: {fileID: 11500000, guid: 84843948765137a43a66bdbc0a0b44b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hpbar: {fileID: 8450630371667127824}
@@ -1507,9 +1507,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 682807405337980474}
   - {fileID: 4038694064415641804}
   - {fileID: 5977360819658745988}
-  - {fileID: 682807405337980474}
   - {fileID: 5375817758961895703}
   - {fileID: 7417133043896331348}
   m_Father: {fileID: 0}
@@ -1545,7 +1545,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

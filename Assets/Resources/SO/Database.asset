@@ -17,23 +17,29 @@ MonoBehaviour:
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 16, y: 16}
     <Prefab>k__BackingField: {fileID: 490114872968308020, guid: 3abdc6c4f59e81944845e78a517a2802, type: 3}
+    <BuildingCost>k__BackingField: 0
   - <Name>k__BackingField: BlackSmith
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 14, y: 20}
     <Prefab>k__BackingField: {fileID: 5234327580382468683, guid: 8f66cd804da3ede4184fce7d7229c67d, type: 3}
+    <BuildingCost>k__BackingField: 400
   - <Name>k__BackingField: wall
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 10, y: 4}
     <Prefab>k__BackingField: {fileID: 4293633657258281268, guid: 6e2acfe137cd41541904c5e5b1718c3f, type: 3}
+    <BuildingCost>k__BackingField: 200
   - <Name>k__BackingField: RoundWall
     <ID>k__BackingField: 4
     <Size>k__BackingField: {x: 8, y: 8}
     <Prefab>k__BackingField: {fileID: 5297307391107768959, guid: 1470a539b682d6f4abae2a0c0f5f9ff2, type: 3}
+    <BuildingCost>k__BackingField: 200
   - <Name>k__BackingField: gate
     <ID>k__BackingField: 5
     <Size>k__BackingField: {x: 18, y: 6}
     <Prefab>k__BackingField: {fileID: 400019882702679091, guid: 6f66b2b1e3b086f4f8d5e8ad16d6b597, type: 3}
+    <BuildingCost>k__BackingField: 300
   - <Name>k__BackingField: MagicTower
     <ID>k__BackingField: 6
     <Size>k__BackingField: {x: 6, y: 6}
     <Prefab>k__BackingField: {fileID: 1557568412387135820, guid: 50741222dc95754469db8f54a0a78dd9, type: 3}
+    <BuildingCost>k__BackingField: 600

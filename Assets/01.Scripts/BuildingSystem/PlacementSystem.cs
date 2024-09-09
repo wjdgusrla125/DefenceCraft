@@ -48,11 +48,13 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         BuildingType buildingType = GetBuildingTypeFromID(ID);
+        
         if (!CanPlaceBuilding(buildingType))
         {
             Debug.Log($"Cannot place {buildingType}. Required buildings are not present.");
             return;
         }
+        
         gridVisualization.SetActive(true);
         buildingState = new PlacementState(ID, grid, preview, database, furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
@@ -98,6 +100,7 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
+        preview.StopShowingPreview();
         buildingState.OnAction(gridPosition);
     }
 

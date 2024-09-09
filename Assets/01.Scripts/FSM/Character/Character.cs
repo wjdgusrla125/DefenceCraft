@@ -25,9 +25,12 @@ public class Character : CharacterBase<FSM_Character>
     public IntVariable resourceVariable;
     public GameObject MagicCircle;
     
+    public bool isBuilding = false;
+    
     public static readonly int IdleHash = Animator.StringToHash("Idle");
     public static readonly int MoveHash = Animator.StringToHash("Move");
     public static readonly int DeadHash = Animator.StringToHash("Dead");
+    public static readonly int SkillHash = Animator.StringToHash("Working");
     
     public int UnitType
     {
@@ -92,6 +95,8 @@ public class Character : CharacterBase<FSM_Character>
 
     public void ExecuteActiveSkill()
     {
+        if (isBuilding) return;
+        
         if (activeSkillInstance != null)
         {
             _animator.CrossFade(activeSkillInstance.info.AnimationName_Hash, 0.0f);
@@ -108,12 +113,15 @@ public class Character : CharacterBase<FSM_Character>
         {
             activeSkillInstance = skillInstances[0];
             activeSkillInstance.target = target;
+            
+            //SetDestination(target.transform.position, true);
         }
     }
-
-    // 이동 관리
+    
     public void SetDestination(Vector3 target, bool isSkillTarget = false)
     {
+        if (isBuilding) return;
+
         if (isSkillTarget && activeSkillInstance != null && activeSkillInstance.target != null)
         {
             Vector3 targetPosition = activeSkillInstance.target.transform.position;
@@ -125,7 +133,7 @@ public class Character : CharacterBase<FSM_Character>
         {
             _agent.SetDestination(target);
         }
-        moveTarget = target;    
+        moveTarget = target;
     }
 
     public Vector3 GetMoveTarget()
@@ -229,14 +237,29 @@ public class Character : CharacterBase<FSM_Character>
         Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Move);
         SetDestination(destination);
     }
-
+    
+    public void ResetActiveSkill()
+    {
+        activeSkillInstance.target = null;
+        activeSkillInstance = null;
+        skillInstances.Clear();
+    
+        // 기본 상태로 변경
+        Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Idle);
+    }
+    
     public void CheckArrivalAndHandleState()
     {
-        if (Vector3.Distance(transform.position, moveTarget) <= 0.1f ||
-            (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance && _agent.velocity.sqrMagnitude < 0.01f))
+        if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance && _agent.velocity.sqrMagnitude < 0.01f)
         {
             _agent.ResetPath();
             Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Idle);
+
+            // If there's an active skill target, execute the skill
+            if (activeSkillInstance != null && activeSkillInstance.target != null)
+            {
+                ExecuteActiveSkill();
+            }
         }
     }
     
@@ -266,13 +289,11 @@ public class Character : CharacterBase<FSM_Character>
     {
         if (activeSkillInstance != null && activeSkillInstance.info.SkillPrefab != null)
         {
-            _unitMana.UseMP(50f);
+            _unitMana.UseMP(70f);
             Instantiate(activeSkillInstance.info.SkillPrefab, targetPosition, Quaternion.identity);
             Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Idle);
         }
     }
-
-    
     
     //데미지
     public void TakeDamage(float damage)
@@ -283,5 +304,29 @@ public class Character : CharacterBase<FSM_Character>
         {
             Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Dead);
         }
+    }
+    
+    //건물
+    public void StartBuilding()
+    {
+        isBuilding = true;
+        
+        _agent.isStopped = true;
+        
+        _animator.CrossFade(SkillHash, 0.1f);
+    }
+
+    public void StopBuilding()
+    {
+        isBuilding = false;
+        
+        _agent.isStopped = false;
+        
+        _animator.CrossFade(IdleHash, 0.1f);
+    }
+    
+    public bool IsBuilding()
+    {
+        return isBuilding;
     }
 }

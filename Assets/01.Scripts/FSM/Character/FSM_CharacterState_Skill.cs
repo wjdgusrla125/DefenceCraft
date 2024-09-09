@@ -38,9 +38,16 @@ public class FSM_CharacterState_Skill : VMyState<FSM_CharacterState>
             _character.Fsm.ChangeState(FSM_CharacterState.FSM_CharacterState_Dead);
         }
         
+        if (_character.activeSkillInstance.target == null || _character.activeSkillInstance.target.activeSelf == false)
+        {
+            Debug.Log("Reset");
+            _character.ResetActiveSkill();
+            return;
+        }
+        
         _character.RotateToTarget(_character.activeSkillInstance.target.transform);
         
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && SelectionManager.Instance.unitSelected.Contains(gameObject))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -57,8 +64,6 @@ public class FSM_CharacterState_Skill : VMyState<FSM_CharacterState>
                 }
             }
         }
-        
-        
     }
 
     protected override void ExitState()

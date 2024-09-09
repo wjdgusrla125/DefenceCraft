@@ -71,6 +71,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 6d43198b77247724f9b9c52d866bd5c0, type: 3}
   Name: Gate
   buildingType: 3
+  constructionTime: 10
 --- !u!114 &-3263250084527573336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1426,7 +1427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5981592866283912452
 Transform:
   m_ObjectHideFlags: 0

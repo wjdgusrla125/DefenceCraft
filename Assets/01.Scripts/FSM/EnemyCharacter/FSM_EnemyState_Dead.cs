@@ -11,6 +11,8 @@ public class FSM_EnemyState_Dead : VMyState<FSM_EnemyState>
     protected override void Awake()
     {
         base.Awake();
+        _enemyCharacter = GetComponent<EnemyCharacter>();
+        
     }
     
     protected override void EnterState()

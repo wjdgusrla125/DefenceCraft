@@ -24,6 +24,7 @@ public class MonsterSpawner : MonoBehaviour
 
     void Start()
     {
+        monsterPrefab = Resources.Load<GameObject>("Enemy/DeathKnight");
         InitializePool();
         StartCoroutine(GameTimer());
         StartCoroutine(SpawnRoutine());
@@ -34,7 +35,7 @@ public class MonsterSpawner : MonoBehaviour
         monsterPool = new List<GameObject>();
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject monster = Instantiate(monsterPrefab);
+            GameObject monster = Instantiate(monsterPrefab, transform);
             monster.SetActive(false);
             monsterPool.Add(monster);
         }
@@ -113,7 +114,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         foreach (GameObject monster in monsterPool)
         {
-            if (!monster.activeInHierarchy)
+            if (!monster.activeSelf)
             {
                 return monster;
             }
@@ -125,6 +126,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         monster.OnDeath -= HandleMonsterDeath;
         activeMonsters--;
+        monster.gameObject.SetActive(false);
     }
 }
 
@@ -135,6 +137,5 @@ public class Monster : MonoBehaviour
     public void Die()
     {
         OnDeath?.Invoke(this);
-        gameObject.SetActive(false);
     }
 }

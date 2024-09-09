@@ -21,10 +21,6 @@ public class Castle : Building
                     StartCoroutine(ProduceUnit());
                 }
             }
-            else
-            {
-                Debug.Log($"Not enough gold to produce {unitType}. Required: {unitComponent.unitCost}, Available: {GameManager.Instance.Gold.Value}");
-            }
         }
     }
 }

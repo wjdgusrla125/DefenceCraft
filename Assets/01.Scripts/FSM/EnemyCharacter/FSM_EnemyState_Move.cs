@@ -21,6 +21,7 @@ public class FSM_EnemyState_Move : VMyState<FSM_EnemyState>
         if (_enemyCharacter._enemyHealth.IsDeath())
         {
             _enemyCharacter.Fsm.ChangeState(FSM_EnemyState.FSM_EnemyState_Dead);
+            return;
         }
         
         _enemyCharacter.DetectTarget();

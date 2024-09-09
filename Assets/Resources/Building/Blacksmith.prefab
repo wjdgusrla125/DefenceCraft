@@ -551,6 +551,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 21140fef96790a740858528fefb83622, type: 3}
   Name: BlackSmith
   buildingType: 2
+  constructionTime: 10
 --- !u!114 &7063253820463640750
 MonoBehaviour:
   m_ObjectHideFlags: 0

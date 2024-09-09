@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
     public IntVariable Gold;
 
     public GameObject Nexus;
+    public GameObject NexusPrefab;
+
+    public bool isGameOver = false;
     
     private void Awake()
     {
@@ -20,16 +24,22 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
+
+        NexusPrefab = Resources.Load<GameObject>("Building/BlackCastle");
+        Nexus = Instantiate(NexusPrefab, Vector3.zero, Quaternion.identity);
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void Update()
     {
         if (Nexus == null)
         {
-            Debug.Log("게임 종료");
-            //게임 종료 설정
+            isGameOver = true;
         }
     }
 }

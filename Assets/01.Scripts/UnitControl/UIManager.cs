@@ -54,6 +54,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI goldText;
     
     public DisplayUI displayUI;
+
+    public GameObject GameOverUI;
     
     public Building selectedBuilding;
     
@@ -69,7 +71,7 @@ public class UIManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         
         for (int i = 0; i < skillButtons.Count; i++)
@@ -86,12 +88,14 @@ public class UIManager : MonoBehaviour
 
         DisableAllUI();
         HideBuildingUI();
+        GameOverUI.SetActive(false);
     }
 
     private void Update()
     {
         UpdateDisplayUI();
         UpdateResource();
+        GameOverUIActive();
     }
 
     private void SkillButtonClicked(int skillIndex)
@@ -152,7 +156,18 @@ public class UIManager : MonoBehaviour
         {
             if (skillButton.skillIndex == unitType)
             {
-                skillButton.button.gameObject.SetActive(true);
+                if (skillButton.skillIndex == 0)
+                {
+                    if (SelectionManager.Instance.unitSelected.Count == 1)
+                    {
+                        skillButton.button.gameObject.SetActive(true);
+                    }
+                    
+                }
+                else
+                {
+                    skillButton.button.gameObject.SetActive(true);
+                }
             }
         }
     }
@@ -369,5 +384,13 @@ public class UIManager : MonoBehaviour
     private void UpdateResource()
     {
         goldText.text = $"{GameManager.Instance.Gold.Value}";
+    }
+
+    private void GameOverUIActive()
+    {
+        if (GameManager.Instance.isGameOver)
+        {
+            GameOverUI.SetActive(true);
+        }
     }
 }       

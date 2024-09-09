@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PreviewSystem : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class PreviewSystem : MonoBehaviour
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size, int rotation)
     {
         previewObject = Instantiate(prefab);
+        previewObject.GetComponent<NavMeshObstacle>().enabled = false;
         PreparePreview(previewObject);
         PrepareCursor(size, rotation);
         cellIndicator.SetActive(true);

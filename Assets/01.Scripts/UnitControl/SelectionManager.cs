@@ -65,10 +65,9 @@ public class SelectionManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (IsAnyUnitInMagicSkillState())
-            {
-                return;
-            }
+            if (IsAnyUnitInMagicSkillState()) return;
+            
+            if (IsPointerOverUIElement()) return;
             
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
