@@ -270,7 +270,7 @@ public class Character : CharacterBase<FSM_Character>
     
     private void HandleSkillButtonClicked(int skillIndex)
     {
-        if (SelectionManager.Instance.unitSelected.Contains(this.gameObject))
+        if (NSelectionManager.Instance.unitSelected.Contains(this.gameObject))
         {
             if (skillIndex == 1 && _unitMana.currrentUnitMP >= 70f)
             {

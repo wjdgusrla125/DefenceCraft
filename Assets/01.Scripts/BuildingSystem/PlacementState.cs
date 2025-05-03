@@ -62,7 +62,7 @@ public class PlacementState : IBuildingState
         buildPosition = gridPosition;
         buildingPrefab = database.objectsData[selectedObjectIndex].Prefab;
         
-        foreach (GameObject unit in SelectionManager.Instance.unitSelected)
+        foreach (GameObject unit in NSelectionManager.Instance.unitSelected)
         {
             Character character = unit.GetComponent<Character>();
             if (character != null)

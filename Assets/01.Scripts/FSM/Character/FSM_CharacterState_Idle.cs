@@ -26,7 +26,7 @@ public class FSM_CharacterState_Idle : VMyState<FSM_CharacterState>
         
         _character.DetectEnemy();
         
-        if (Input.GetMouseButtonDown(1) && SelectionManager.Instance.unitSelected.Contains(this.gameObject))
+        if (Input.GetMouseButtonDown(1) && NSelectionManager.Instance.unitSelected.Contains(this.gameObject))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

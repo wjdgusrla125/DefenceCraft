@@ -47,7 +47,7 @@ public class FSM_CharacterState_Skill : VMyState<FSM_CharacterState>
         
         _character.RotateToTarget(_character.activeSkillInstance.target.transform);
         
-        if (Input.GetMouseButtonDown(1) && SelectionManager.Instance.unitSelected.Contains(gameObject))
+        if (Input.GetMouseButtonDown(1) && NSelectionManager.Instance.unitSelected.Contains(gameObject))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

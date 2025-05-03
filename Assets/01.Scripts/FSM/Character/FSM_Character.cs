@@ -12,7 +12,7 @@ public enum FSM_CharacterState
     FSM_CharacterState_Build
 }
 
-public class FSM_Character : StateMachine<FSM_CharacterState>
+public class FSM_Character : NStateMachine<FSM_CharacterState>
 {
     
 }

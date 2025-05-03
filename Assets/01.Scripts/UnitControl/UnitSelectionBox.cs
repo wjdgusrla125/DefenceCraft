@@ -35,7 +35,7 @@ public class UnitSelectionBox : MonoBehaviour
         {
             if (boxVisual.rect.width > 0 || boxVisual.rect.height > 0)
             {
-                SelectionManager.Instance.DeselectAll();
+                NSelectionManager.Instance.DeselectAll();
                 SelectUnits();
             }
             
@@ -102,11 +102,11 @@ public class UnitSelectionBox : MonoBehaviour
  
     void SelectUnits()
     {
-        foreach (var unit in SelectionManager.Instance.allUnitsList)
+        foreach (var unit in NSelectionManager.Instance.allUnitsList)
         {
             if (selectionBox.Contains(myCam.WorldToScreenPoint(unit.transform.position)))
             {
-                SelectionManager.Instance.DragSelect(unit);
+                NSelectionManager.Instance.DragSelect(unit);
             }
         }
     }

@@ -32,7 +32,7 @@ public abstract class Building : MonoBehaviour
     {
         //만약 데미지 안들어올경우 여기 수정
         _buildingHealth = GetComponentInParent<UnitHealth>();
-        SelectionManager.Instance.allBuildingList.Add(gameObject);
+        NSelectionManager.Instance.allBuildingList.Add(gameObject);
 
         SetConstructionTime();
     }
@@ -44,7 +44,7 @@ public abstract class Building : MonoBehaviour
 
     private void OnDestroy()
     {
-        SelectionManager.Instance.allBuildingList.Remove(gameObject);
+        NSelectionManager.Instance.allBuildingList.Remove(gameObject);
     }
 
     public virtual void EnqueueUnit(UnitType unitType)

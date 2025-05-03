@@ -11,7 +11,7 @@ public enum FSM_EnemyState
     FSM_EnemyState_Dead
 }
 
-public class FSM_Enemy : StateMachine<FSM_EnemyState>
+public class FSM_Enemy : NStateMachine<FSM_EnemyState>
 {
     
 }

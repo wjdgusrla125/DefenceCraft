@@ -9,7 +9,7 @@ public class MagicTowers : Building
         if (unitType == UnitType.Mage)
         {
             GameObject unitPrefab = UnitFactory.GetUnitPrefab(unitType);
-            Unit unitComponent = unitPrefab.GetComponent<Unit>();
+            NUnit unitComponent = unitPrefab.GetComponent<NUnit>();
 
             if (GameManager.Instance.Gold.Value >= unitComponent.unitCost)
             {

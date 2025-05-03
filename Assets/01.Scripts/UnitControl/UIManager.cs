@@ -158,7 +158,7 @@ public class UIManager : MonoBehaviour
             {
                 if (skillButton.skillIndex == 0)
                 {
-                    if (SelectionManager.Instance.unitSelected.Count == 1)
+                    if (NSelectionManager.Instance.unitSelected.Count == 1)
                     {
                         skillButton.button.gameObject.SetActive(true);
                     }
@@ -235,8 +235,8 @@ public class UIManager : MonoBehaviour
 
     private void UpdateDisplayUI()
     {
-        List<GameObject> unitSelected = SelectionManager.Instance?.unitSelected ?? new List<GameObject>();
-        GameObject buildingSelected = SelectionManager.Instance?.buildingSelected;
+        List<GameObject> unitSelected = NSelectionManager.Instance?.unitSelected ?? new List<GameObject>();
+        GameObject buildingSelected = NSelectionManager.Instance?.buildingSelected;
 
         if (buildingSelected != null)
         {
@@ -282,7 +282,7 @@ public class UIManager : MonoBehaviour
             {
                 UnitType unitType = building.productionQueue.ToArray()[i];
                 GameObject unitPrefab = UnitFactory.GetUnitPrefab(unitType);
-                Unit unitComponent = unitPrefab.GetComponent<Unit>();
+                NUnit unitComponent = unitPrefab.GetComponent<NUnit>();
 
                 displayUI.buildingUnitProductImages[i].gameObject.SetActive(true);
                 displayUI.buildingUnitProductImages[i].sprite = unitComponent.icon;
@@ -341,7 +341,7 @@ public class UIManager : MonoBehaviour
         displayUI.buildingDP.SetActive(false);
         displayUI.buildingUnitProductDP.SetActive(false);
 
-        Unit unitComponent = unit.GetComponent<Unit>();
+        NUnit unitComponent = unit.GetComponent<NUnit>();
         UnitHealth unitHealth = unit.GetComponent<UnitHealth>();
         UnitMana unitMana = unit.GetComponent<UnitMana>();
 
@@ -372,7 +372,7 @@ public class UIManager : MonoBehaviour
             if (i < units.Count)
             {
                 displayUI.unitImages[i].gameObject.SetActive(true);
-                displayUI.unitImages[i].sprite = units[i].GetComponent<Unit>().icon;
+                displayUI.unitImages[i].sprite = units[i].GetComponent<NUnit>().icon;
             }
             else
             {

@@ -8,13 +8,8 @@ public class SceneTransition : MonoBehaviour
     public string nextSceneName; 
     public string loadingSceneName = "Loading";
     
-    private bool isPaused = false;
-
-    private void Update()
-    {
-        
-    }
-
+    //private bool isPaused = false;
+    
     public void GoToNextScene()
     {
         StartCoroutine(LoadSceneAsync());

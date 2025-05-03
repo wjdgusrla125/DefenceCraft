@@ -125,7 +125,7 @@ public class FSM_CharacterState_MagicSkill : VMyState<FSM_CharacterState>
         {
             Vector3 targetPosition = hit.point;
 
-            foreach (var selectedUnit in SelectionManager.Instance.unitSelected)
+            foreach (var selectedUnit in NSelectionManager.Instance.unitSelected)
             {
                 Character selectedCharacter = selectedUnit.GetComponent<Character>();
 

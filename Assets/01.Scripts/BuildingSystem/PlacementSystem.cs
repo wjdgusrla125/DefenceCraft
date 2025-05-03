@@ -69,7 +69,7 @@ public class PlacementSystem : MonoBehaviour
         
         foreach (BuildingType requiredType in buildingDependencies[buildingType])
         {
-            bool requiredBuildingExists = SelectionManager.Instance.allBuildingList
+            bool requiredBuildingExists = NSelectionManager.Instance.allBuildingList
                 .Any(building => building.GetComponent<Building>()?.buildingType == requiredType);
 
             if (!requiredBuildingExists) return false;

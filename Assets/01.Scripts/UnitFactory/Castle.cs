@@ -9,7 +9,7 @@ public class Castle : Building
         if (unitType == UnitType.Workers)
         {
             GameObject unitPrefab = UnitFactory.GetUnitPrefab(unitType);
-            Unit unitComponent = unitPrefab.GetComponent<Unit>();
+            NUnit unitComponent = unitPrefab.GetComponent<NUnit>();
 
             if (GameManager.Instance.Gold.Value >= unitComponent.unitCost)
             {
